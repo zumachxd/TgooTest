@@ -1,46 +1,68 @@
-# Getting Started with Create React App
+# **Aplicativo de Gerenciamento de Postagens**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este é um aplicativo **ReactJS** que permite o gerenciamento de postagens (*CRUD*) consumindo uma **API REST**. O aplicativo atende aos requisitos definidos para um teste de desenvolvimento para uma vaga específica.
 
-## Available Scripts
+## **Recursos**
 
-In the project directory, you can run:
+- Listagem de postagens paginadas com opção de filtro por título.
+- Formulário de cadastro de postagens com campos específicos.
+- Visualização de detalhes de uma postagem.
+- Edição de postagens existentes.
+- Exclusão de postagens.
+- Interface de usuário **responsiva** e **agradável**.
+- Consumo da API no front-end com tratamento adequado de erros.
 
-### `npm start`
+## **API de Autenticação**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+O aplicativo se autentica na API da seguinte maneira:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Envia um token de autenticação da API no header chamado "Api-Authorization" com valor `Bearer $2y$10$x3wqNWc4ZonF6dVWKAPnMuU1A258mgKbGWziVPdL5mhzqQwlhQEqK`.
+- Envia um token de usuário no header chamado "Authorization" com valor `35|bkdTKk4t5WoNeApCMkVwWLBhmkjtarmeULMfwKiW`.
 
-### `npm test`
+## **Requisitos de Desenvolvimento**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **ReactJS** é a base do projeto.
+- Utilização de ferramentas de gerenciamento de estado, como **Redux**, é encorajada.
+- Utilização de ferramentas de roteamento, como **React Router**, é encorajada.
+- Pode-se utilizar bibliotecas e frameworks de terceiros.
 
-### `npm run build`
+## **Como Iniciar o Projeto**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone este repositório.
+2. Instale as dependências usando `npm install` ou `yarn install`.
+3. Execute o aplicativo usando `npm start` ou `yarn start`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## **Critérios de Avaliação**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Os candidatos serão avaliados com base nos seguintes critérios:
 
-### `npm run eject`
+- Qualidade do código, organização e boas práticas de desenvolvimento.
+- Funcionalidade completa e correta do aplicativo, atendendo a todos os requisitos.
+- Layout e design **responsivos** e **agradáveis**.
+- Manipulação de erros e feedback adequado ao usuário.
+- Eficiência na utilização da API, evitando recargas desnecessárias.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## **Contribuindo**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Contribuições são bem-vindas! Se você encontrar problemas ou tiver melhorias para sugerir, sinta-se à vontade para abrir uma "issue" ou enviar um "pull request".
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## **Autor**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+*Patrick Zumach thomaz*
 
-## Learn More
+## **Bibliotecas**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Aqui estão algumas das bibliotecas importantes utilizadas neste projeto:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **@reduxjs/toolkit**: Uma ferramenta para gerenciar o estado da aplicação em conjunto com o Redux.
+- **axios**: Uma biblioteca para fazer requisições HTTP para a API.
+- **moment**: Uma biblioteca para formatação de datas.
+- - **react-paginate**: Uma biblioteca para adicionar componentes de paginação.
+- **react-redux**: Uma biblioteca para integrar o React com o Redux para gerenciamento de estado.
+- **react-router-dom**: Uma biblioteca para criação de rotas na aplicação.
+-- **web-vitals**: Uma biblioteca para monitoramento de métricas de desempenho web.
+
+Observe que esta lista inclui apenas algumas das bibliotecas utilizadas no projeto. Dependendo das necessidades específicas do seu projeto, outras bibliotecas ou dependências podem ter sido utilizadas.
+
+
+
