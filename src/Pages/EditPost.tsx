@@ -4,12 +4,18 @@ import { fetchPostById, updatePost } from '../API/API';
 import { PostData } from '../interfaces/Interface';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../Componentes/Loading';
+import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { fetchPostsAsync } from '../Redux/postSlice';
+import GenericModal from '../Componentes/GenericModal';
 
 
 function EditPost() {
     const { postId } = useParams();
     const [postDetails, setPostDetails] = useState<PostData | null>(null);
     const [loading, setLoading] = useState(true);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,10 +35,20 @@ function EditPost() {
         fetchDetails();
     }, [postId]);
 
+    const formatDate = (newdata: Date) => moment(newdata).format('DD-MMM-YYYY HH:mm');
+    const dispatch = useDispatch<any>();
+
+    const updatePosts = async () => {
+        await dispatch(fetchPostsAsync());
+
+    };
+
+
     const handleUpdate = async () => {
         try {
             if (postDetails) {
                 if (postId !== undefined) {
+                    postDetails.updated_at = moment().format();
 
                     await updatePost(parseInt(postId), postDetails);
                 }
@@ -40,10 +56,9 @@ function EditPost() {
         } catch (error) {
             console.error('Erro ao atualizar a postagem', error);
         }
-
-        navigate('/');
+        updatePosts()
+        setShowSuccessModal(true);
     };
-
     if (loading) {
         return <Loading />;
     }
@@ -77,16 +92,15 @@ function EditPost() {
                 <label className="block text-sm font-medium text-gray-700">Data de Publicação:</label>
                 <input
                     type="text"
-                    value={postDetails.published_at}
-                    onChange={(e) => setPostDetails({ ...postDetails, published_at: e.target.value })}
+                    defaultValue={formatDate(new Date(postDetails.published_at))}
                     className="border border-gray-300 rounded-md w-full px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-300"
                 />
             </div>
             <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">Data de Destaque:</label>
                 <input
-                    type="text"
-                    value={postDetails.featured_until}
+                    type="date"
+                    value={formatDate(new Date(postDetails.featured_until))}
                     onChange={(e) => setPostDetails({ ...postDetails, featured_until: e.target.value })}
                     className="border border-gray-300 rounded-md w-full px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-300"
                 />
@@ -140,6 +154,11 @@ function EditPost() {
             <button onClick={() => navigate(-1)} className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300">
                 Voltar
             </button>
+            <GenericModal isOpen={showSuccessModal} onRequestClose={() => navigate('/')}>
+                <h2 className="text-lg font-semibold">Sucesso</h2>
+                <p className="text-gray-600 mb-4">Post criado com sucesso.</p>
+            </GenericModal>
+
         </div>
     );
 }

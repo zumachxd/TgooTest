@@ -1,9 +1,13 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPost } from '../API/API';
+import { useDispatch } from 'react-redux';
 import { PostData } from '../interfaces/Interface';
+import GenericModal from '../Componentes/GenericModal';
+import { fetchPostsAsync } from '../Redux/postSlice';
 
 function NewPostPage() {
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [formData, setFormData] = useState<PostData>({
         title: '',
         tags: '',
@@ -14,7 +18,10 @@ function NewPostPage() {
         secondary_text: '',
         seo_title: '',
         seo_tags: '',
+        updated_at: '',
     });
+
+    const dispatch = useDispatch<any>();
 
     const navigate = useNavigate();
 
@@ -26,6 +33,11 @@ function NewPostPage() {
         });
     };
 
+    const updatePosts = async () => {
+        await dispatch(fetchPostsAsync());
+
+    };
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
@@ -33,15 +45,14 @@ function NewPostPage() {
             alert('O campo "Título" é obrigatório.');
             return;
         }
-
         try {
             await createPost(formData);
+
         } catch (error) {
             console.error('Erro ao criar a postagem:', error);
         }
-
-        navigate('/');
-
+        updatePosts()
+        setShowSuccessModal(true);
     };
 
     return (
@@ -150,6 +161,10 @@ function NewPostPage() {
                     Criar Postagem
                 </button>
             </form>
+            <GenericModal isOpen={showSuccessModal} onRequestClose={() => navigate('/')}>
+                <h2 className="text-lg font-semibold">Sucesso</h2>
+                <p className="text-gray-600 mb-4">Post criado com sucesso.</p>
+            </GenericModal>
         </div>
     );
 }

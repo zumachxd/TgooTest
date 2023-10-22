@@ -2,8 +2,8 @@ export interface Post {
     id: number;
     title: string;
     slug: string;
-    created_at: string;
-    updated_at: string;
+    created_at: Date;
+    updated_at: Date;
 }
 
 export interface DeleteModalProps {
@@ -22,4 +22,6 @@ export interface PostData {
     secondary_text: string;
     seo_title: string;
     seo_tags: string;
+    updated_at: string;
+    
 }
