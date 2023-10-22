@@ -17,7 +17,7 @@ Este é um aplicativo **ReactJS** que permite o gerenciamento de postagens (*CRU
 O aplicativo se autentica na API da seguinte maneira:
 
 - Envia um token de autenticação da API no header chamado "Api-Authorization" com valor `Bearer $2y$10$x3wqNWc4ZonF6dVWKAPnMuU1A258mgKbGWziVPdL5mhzqQwlhQEqK`.
-- Envia um token de usuário no header chamado "Authorization" com valor `35|bkdTKk4t5WoNeApCMkVwWLBhmkjtarmeULMfwKiW`.
+- Envia um token de usuário no header chamado "Authorization" com valor `Bearer 35|bkdTKk4t5WoNeApCMkVwWLBhmkjtarmeULMfwKiW`.
 
 ## **Requisitos de Desenvolvimento**
 
