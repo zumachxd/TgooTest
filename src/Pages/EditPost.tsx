@@ -156,7 +156,7 @@ function EditPost() {
             </button>
             <GenericModal isOpen={showSuccessModal} onRequestClose={() => navigate('/')}>
                 <h2 className="text-lg font-semibold">Sucesso</h2>
-                <p className="text-gray-600 mb-4">Post criado com sucesso.</p>
+                <p className="text-gray-600 mb-4">Post editado com sucesso.</p>
             </GenericModal>
 
         </div>
