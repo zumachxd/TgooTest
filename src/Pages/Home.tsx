@@ -51,6 +51,10 @@ function Home() {
             await dispatch(fetchPostsAsync());
             setPostId(null);
         }
+        else{
+            alert('Erro ao exluir post!');
+
+        }
     };
 
     const offset = currentPage * itemsPerPage;
@@ -68,7 +72,7 @@ function Home() {
             {loading === 'pending' ? (
                 <Loading />
             ) : (
-                <section>
+                <section className='mb-6'>
                     <table className="min-w-full">
                         <thead>
                             <tr>
