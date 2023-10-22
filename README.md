@@ -1,6 +1,6 @@
 # **Aplicativo de Gerenciamento de Postagens**
 
-Este é um aplicativo **ReactJS** que permite o gerenciamento de postagens (*CRUD*) consumindo uma **API REST**. O aplicativo atende aos requisitos definidos para um teste de desenvolvimento para uma vaga específica.
+Este é um aplicativo **ReactJS** que permite o gerenciamento de postagens (*CRUD*) consumindo uma **API REST**.
 
 ## **Recursos**
 
@@ -31,16 +31,6 @@ O aplicativo se autentica na API da seguinte maneira:
 1. Clone este repositório.
 2. Instale as dependências usando `npm install` ou `yarn install`.
 3. Execute o aplicativo usando `npm start` ou `yarn start`.
-
-## **Critérios de Avaliação**
-
-Os candidatos serão avaliados com base nos seguintes critérios:
-
-- Qualidade do código, organização e boas práticas de desenvolvimento.
-- Funcionalidade completa e correta do aplicativo, atendendo a todos os requisitos.
-- Layout e design **responsivos** e **agradáveis**.
-- Manipulação de erros e feedback adequado ao usuário.
-- Eficiência na utilização da API, evitando recargas desnecessárias.
 
 ## **Contribuindo**
 
