@@ -8,6 +8,8 @@ import { fetchPostsAsync } from '../Redux/postSlice';
 
 function NewPostPage() {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [showErrorModal, setShowErrorModal] = useState(false);
+
     const [formData, setFormData] = useState<PostData>({
         title: '',
         tags: '',
@@ -47,12 +49,15 @@ function NewPostPage() {
         }
         try {
             await createPost(formData);
+            updatePosts()
+            setShowSuccessModal(true);
+
 
         } catch (error) {
             console.error('Erro ao criar a postagem:', error);
+            setShowErrorModal(true);
+
         }
-        updatePosts()
-        setShowSuccessModal(true);
     };
 
     return (
@@ -164,6 +169,10 @@ function NewPostPage() {
             <GenericModal isOpen={showSuccessModal} onRequestClose={() => navigate('/')}>
                 <h2 className="text-lg font-semibold">Sucesso</h2>
                 <p className="text-gray-600 mb-4">Post criado com sucesso.</p>
+            </GenericModal>
+            <GenericModal isOpen={showErrorModal} onRequestClose={() => navigate('/')}>
+                <h2 className="text-lg font-semibold text-red-500 ">Ops!</h2>
+                <p className="text-gray-600 mb-4">Ocorreu um erro no seu novo Post.</p>
             </GenericModal>
         </div>
     );

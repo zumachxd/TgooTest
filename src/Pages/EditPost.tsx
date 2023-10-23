@@ -15,6 +15,8 @@ function EditPost() {
     const [postDetails, setPostDetails] = useState<PostData | null>(null);
     const [loading, setLoading] = useState(true);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [showErrorModal, setShowErrorModal] = useState(false);
+
 
     const navigate = useNavigate();
 
@@ -51,20 +53,25 @@ function EditPost() {
                     postDetails.updated_at = moment().format();
 
                     await updatePost(parseInt(postId), postDetails);
+                    updatePosts()
+                    setShowSuccessModal(true);
                 }
             }
         } catch (error) {
             console.error('Erro ao atualizar a postagem', error);
+            setShowErrorModal(true);
+
         }
-        updatePosts()
-        setShowSuccessModal(true);
     };
     if (loading) {
         return <Loading />;
     }
 
     if (!postDetails) {
-        return <p>Não foi possível encontrar os detalhes da postagem.</p>;
+        return <div className="bg-red-500 text-white font-bold px-4 py-2 rounded-md">
+            Não foi possível encontrar os detalhes da postagem.
+        </div>
+
     }
 
     return (
@@ -157,6 +164,10 @@ function EditPost() {
             <GenericModal isOpen={showSuccessModal} onRequestClose={() => navigate('/')}>
                 <h2 className="text-lg font-semibold">Sucesso</h2>
                 <p className="text-gray-600 mb-4">Post editado com sucesso.</p>
+            </GenericModal>
+            <GenericModal isOpen={showErrorModal} onRequestClose={() => navigate('/')}>
+                <h2 className="text-lg font-semibold text-red-500 ">Ops!</h2>
+                <p className="text-gray-600 mb-4">Ocorreu um erro na sua edição.</p>
             </GenericModal>
 
         </div>

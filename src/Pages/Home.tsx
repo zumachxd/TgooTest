@@ -11,12 +11,16 @@ import edit from './assets/edit.png';
 import lixo from './assets/lixo.png';
 import moment from 'moment';
 import ReactPaginate from 'react-paginate';
+import GenericModal from '../Componentes/GenericModal';
 
 function Home() {
     const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
     const posts = useSelector(selectPosts).data;
     const loading = useSelector(selectLoading);
     const [PostId, setPostId] = useState(null);
+    const [showErrorModal, setShowErrorModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+
     const navigate = useNavigate();
 
     const [currentPage, setCurrentPage] = useState(0);
@@ -46,13 +50,18 @@ function Home() {
 
     const handleConfirmDelete = async () => {
         if (PostId) {
-            await deletePost(PostId);
-            alert('Post excluído com sucesso');
-            await dispatch(fetchPostsAsync());
-            setPostId(null);
+            try {
+                await deletePost(PostId);
+                setShowSuccessModal(true);
+                await dispatch(fetchPostsAsync());
+                setPostId(null);
+            }
+            catch {
+                setShowErrorModal(true);
+
+            }
         }
-        else{
-            alert('Erro ao exluir post!');
+        else {
 
         }
     };
@@ -151,6 +160,16 @@ function Home() {
                     />
                 </div>)}
             <DeleteModal isOpen={PostId !== null} onRequestClose={() => setPostId(null)} onDelete={handleConfirmDelete} />
+            <GenericModal isOpen={showErrorModal} onRequestClose={() => setShowErrorModal(false)}>
+                <h2 className="text-lg font-semibold text-red-500 ">Ops!</h2>
+                <p className="text-gray-600 mb-4">Não foi possivel excluir esse Post.</p>
+            </GenericModal>
+            <GenericModal isOpen={showSuccessModal} onRequestClose={() => setShowSuccessModal(false)}>
+                <h2 className="text-lg font-semibold">Sucesso</h2>
+                <p className="text-gray-600 mb-4">Post excluido com sucesso.</p>
+            </GenericModal>
+
+
         </div>
     );
 }
